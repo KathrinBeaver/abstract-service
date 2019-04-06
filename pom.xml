@@ -33,7 +33,26 @@
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
+
+		<!--<dependency>-->
+		<!--<groupId>ru.textanalysis.tfwwt</groupId>-->
+		<!--<artifactId>jmorfsdk</artifactId>-->
+		<!--<version>2.10.5</version>-->
+		<!--</dependency>-->
+		<dependency>
+			<groupId>com.github.jalexpr</groupId>
+			<artifactId>JMorfSdk</artifactId>
+			<version>714cb10d25</version>
+		</dependency>
+
 	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
 
 	<build>
 		<plugins>

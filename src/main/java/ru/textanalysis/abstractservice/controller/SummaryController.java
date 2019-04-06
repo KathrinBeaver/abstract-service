@@ -2,12 +2,15 @@ package ru.textanalysis.abstractservice.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.textanalysis.abstractservice.model.TextDto;
 import ru.textanalysis.abstractservice.payload.SummaryResponse;
+import ru.textanalysis.abstractservice.service.MorfologyService;
+import ru.textanalysis.abstractservice.service.SummaryService;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -19,6 +22,9 @@ import java.util.List;
 @RequestMapping("/summary")
 public class SummaryController {
 
+    @Autowired
+    private SummaryService summaryService;
+
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
     @PostMapping("/create")
@@ -27,9 +33,9 @@ public class SummaryController {
         String fullText = new String(Base64.getUrlDecoder().decode(textEncoded), Charset.forName("UTF-8"));
         logger.info(fullText);
 
-        // Логика получения реферата и ключевых слов
+//        String summary = "В траве сидел кузнечик"; // полученный реферат
+        String summary = summaryService.getSummary(fullText); // полученный реферат
 
-        String summary = "В траве сидел кузнечик"; // полученный реферат
         List<String> keyWords = new ArrayList<String>(); // полученный список ключевых слов
         keyWords.add("кузнечик");
         keyWords.add("трава");

@@ -14,5 +14,4 @@ public class AbstractServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AbstractServiceApplication.class, args);
 	}
-
 }
