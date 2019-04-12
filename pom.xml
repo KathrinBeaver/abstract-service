@@ -33,6 +33,11 @@
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>summarizaton</groupId>
+			<artifactId>summarizaton</artifactId>
+			<version>0.0.1</version>
+		</dependency>
 
 		<!--<dependency>-->
 		<!--<groupId>ru.textanalysis.tfwwt</groupId>-->

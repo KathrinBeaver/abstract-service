@@ -35,10 +35,7 @@ public class SummaryController {
 
 //        String summary = "В траве сидел кузнечик"; // полученный реферат
         String summary = summaryService.getSummary(fullText); // полученный реферат
-
-        List<String> keyWords = new ArrayList<String>(); // полученный список ключевых слов
-        keyWords.add("кузнечик");
-        keyWords.add("трава");
+        List<String> keyWords = summaryService.getKeyWords(fullText); // полученный список ключевых слов
 
         Base64.Encoder encoder = Base64.getUrlEncoder();
 
