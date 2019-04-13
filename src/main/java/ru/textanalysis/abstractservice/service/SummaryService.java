@@ -24,12 +24,8 @@ public class SummaryService {
 
     public String getSummary(String fullText) {
         // Логика получения реферата и ключевых слов
-        JMorfSdk jMorfSdk = morfologyService.getjMorfSdk();
-        jMorfSdk.getMorfologyCharacteristics("столов");
-
         Map<Integer, String> referat = methods.getReferatOfMethodSymmetric(fullText,50);
         String summary = methods.getReferatToString(referat);
-
         return summary;
     }
 

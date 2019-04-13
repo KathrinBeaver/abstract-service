@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.textanalysis.abstractservice.exception.EncodeException;
 import ru.textanalysis.abstractservice.model.TextDto;
 import ru.textanalysis.abstractservice.payload.SummaryResponse;
-import ru.textanalysis.abstractservice.service.MorfologyService;
 import ru.textanalysis.abstractservice.service.SummaryService;
 
 import java.io.UnsupportedEncodingException;
@@ -33,7 +33,6 @@ public class SummaryController {
         String fullText = new String(Base64.getUrlDecoder().decode(textEncoded), Charset.forName("UTF-8"));
         logger.info(fullText);
 
-//        String summary = "В траве сидел кузнечик"; // полученный реферат
         String summary = summaryService.getSummary(fullText); // полученный реферат
         List<String> keyWords = summaryService.getKeyWords(fullText); // полученный список ключевых слов
 
@@ -43,7 +42,8 @@ public class SummaryController {
         try {
             summaryEncoded = encoder.encodeToString(summary.getBytes("utf-8"));
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            logger.error("Encode error.");
+            throw new EncodeException("Encode error", e);
         }
 
         List<String> keyWordsEncoded = new ArrayList<String>();
@@ -51,7 +51,8 @@ public class SummaryController {
             try {
                 keyWordsEncoded.add(encoder.encodeToString(keyWord.getBytes("utf-8")));
             } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+                logger.error("Encode error.");
+                throw new EncodeException("Encode error", e);
             }
         }
 

@@ -37,6 +37,8 @@
 			<groupId>summarizaton</groupId>
 			<artifactId>summarizaton</artifactId>
 			<version>0.0.1</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/summarizaton-0.0.1.jar</systemPath>
 		</dependency>
 
 		<!--<dependency>-->
@@ -47,7 +49,7 @@
 		<dependency>
 			<groupId>com.github.jalexpr</groupId>
 			<artifactId>JMorfSdk</artifactId>
-			<version>714cb10d25</version>
+			<version>master-714cb10d25-1</version>
 		</dependency>
 
 	</dependencies>
