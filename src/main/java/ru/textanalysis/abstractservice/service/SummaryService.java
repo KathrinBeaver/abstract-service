@@ -7,6 +7,7 @@ import ru.textanalysis.tfwwt.jmorfsdk.JMorfSdk;
 import summarizaton.MethodsOfSummarization;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,5 +50,51 @@ public class SummaryService {
             }
         }
         return kWords;
+    }
+
+    public List<Word> getSmartKeyWords (String fullText) {
+        MethodsOfSummarization ms = new MethodsOfSummarization();
+        List<Word> keyWords = ms.getKeyWords(fullText);
+        return keyWords;
+    }
+
+    public String getSmartSummary(String fullText, String markers, int procentOfText, int numberOfMethod) {
+        MethodsOfSummarization mS = new MethodsOfSummarization();
+        Map<Integer, String> summaryMap = new HashMap<>();
+
+        switch (numberOfMethod){
+            case 1:
+                summaryMap = mS.getReferatOfMethodStatistic(fullText, procentOfText);
+                break;
+            case 2:
+                summaryMap = mS.getReferatOfMethodSymmetric(fullText, procentOfText);
+                break;
+            case 3:
+                summaryMap = mS.getReferatOfMethodPosition(fullText);
+                break;
+            case 4:
+                summaryMap = mS.getReferatOfMethodPositionAndStatistic(fullText, procentOfText);
+                break;
+            case 5:
+                summaryMap = mS.getReferatOfMethodPositionAndSymmetric(fullText, procentOfText);
+                break;
+            case 6:
+                summaryMap = mS.getReferatOfMethodIndicator(fullText, markers, procentOfText);
+                break;
+            case 7:
+                summaryMap = mS.getReferatOfMethodIndicatorAndStatistic(fullText, markers, procentOfText);
+                break;
+            case 8:
+                summaryMap = mS.getRefeartOfMethodIndicatorAndSymmetric(fullText, markers, procentOfText);
+                break;
+            case 9:
+                summaryMap = mS.getReferatOfMethodIntegration(fullText, markers, procentOfText);
+                break;
+            case 10:
+                summaryMap = mS.getReferatOfMethodIntegrationRandom(fullText, markers, procentOfText);
+                break;
+        }
+        String summary = mS.getReferatToString(summaryMap);
+        return summary;
     }
 }

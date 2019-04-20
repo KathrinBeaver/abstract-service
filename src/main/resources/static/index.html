@@ -2,42 +2,125 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Spring Boot File Upload / Download Rest API Example</title>
+    <title>Сервис автоматического реферирования текста</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="/css/main.css" />
 </head>
 <body>
-<noscript>
-    <h2>Sorry! Your browser doesn't support Javascript</h2>
-</noscript>
-<div class="upload-container">
-    <div class="upload-header">
-        <h2>Spring Boot File Upload / Download Rest API Example</h2>
+<center><h1 style = "font-family:Tahoma">Сервис автоматического реферирования текста</h1></center>
+
+
+<form action = "" method = 'post' id = 'formx'>
+
+    <div class ="text">
+    <p><b>1. Введите текст в текстовое поле</b></p>
+    <p style = "border: 1px solid #8A2BE2; width: 594px; height: 461.5px;"><textarea id = 'text' rows = "30" cols = "80"></textarea></p>
     </div>
-    <div class="upload-content">
-        <div class="single-upload">
-            <h3>Upload Single File</h3>
-            <form id="singleUploadForm" name="singleUploadForm">
-                <input id="singleFileUploadInput" type="file" name="file" class="file-input" required />
-                <button type="submit" class="primary submit-btn">Submit</button>
-            </form>
-            <div class="upload-response">
-                <div id="singleFileUploadError"></div>
-                <div id="singleFileUploadSuccess"></div>
-            </div>
-        </div>
-        <div class="multiple-upload">
-            <h3>Upload Multiple Files</h3>
-            <form id="multipleUploadForm" name="multipleUploadForm">
-                <input id="multipleFileUploadInput" type="file" name="files" class="file-input" multiple required />
-                <button type="submit" class="primary submit-btn">Submit</button>
-            </form>
-            <div class="upload-response">
-                <div id="multipleFileUploadError"></div>
-                <div id="multipleFileUploadSuccess"></div>
-            </div>
-        </div>
+
+    <div class="methods" id="methodsOfSummarization">
+        <p><b>2. Выберите метод реферирования</b><p>
+        <p> <select id = "method" onChange="Selected(this.value)">
+            <option selected="selected" disabled>Выберите метод</option>
+            <optgroup label = "Без использования ключевых слов">
+                <option value = "1">Статистический</option>
+                <option value = "2">Симметричный</option>
+                <option value = "3">Позиционный</option>
+                <option value = "4">Позиционный-Статистический</option>
+                <option value = "5">Позиционный-Симметричный</option>
+            </optgroup>
+            <optgroup label = "C использованием ключевых слов">
+                    <option value = "6">Индикаторный</option>
+                    <option value = "7">Индикаторный-Статистический</option>
+                    <option value = "8">Индикаторный-Симметричный</option>
+                    <option value = "9">Интегральный</option>
+                    <option value = "10">Интегральный (случайный выбор)</option>
+                </optgroup>
+        </select>
     </div>
+
+
+   <!-- <script type="text/javascript">
+        function Selected(a)
+        {
+            if(a == 6 || a == 7 || a == 8 || a == 9 || a == 10){
+                document.getElementById('mr').style.display = 'block';
+            } else if (a == 1 || a == 2 || a == 3 || a == 4 || a == 5){
+                document.getElementById('mr').style.display = 'none';
+            }
+        }
+    </script>
+-->
+    <div class = "procent">
+        <p style = "line-height: 0.5;"><b>3. Введите объём реферата в процентах</b></p>
+        <p style = "fline-height: 0.5;"><i>(например: 30, 50, 70)</i></p>
+        <p style = "border: 1px solid #8A2BE2; width: 90px; height: 21px"><textarea id = 'volume'rows = "1" cols = "10"></textarea><p>
+    </div>
+
+    <div class="markers" id = "mr">
+        <p style = "line-height: 0.5;"><b>4. Введите ключевые слова через запятую </b></p>
+        <p style = "line-height: 0.5;"><i>(например: органичекий, химия, вещество, углерод) </i></p>
+        <p style = "border: 1px solid #8A2BE2; height: 36px; width: 594px"><textarea id = 'markersInText'rows = "2" cols = "80"></textarea></p>
+    </div>
+
+    <p><input type="submit" class= "b1" value="Получить реферат!"></p>
+</form>
+
+
+<!--<script type="text/javascript">
+    $('#formx').submit(function(e){
+        e.preventDefault();
+        $.ajax({
+            url: "localhost:8088",
+            type: "POST",
+            data: $('#formx').serialize(),
+            success: function(returnData) {
+                $('#textReferat').html(returnData);
+            },
+            error: function(){
+                $('#textReferat').val("Всё плохо! Ничего не получается!");
+            }
+        });
+    });
+</script>-->
+
+<div id = "ref" class="referat">
+    <p><b>Реферат</b></p>
+    <p style = "border: 1px solid #8A2BE2; height: 461.5px"><textarea id = "textReferat" rows = "30" cols="65"></textarea></p>
 </div>
+
+<div id = "kw" class="keyWords">
+    <p><b>Ключевые слова</b></p>
+    <p style = "border: 1px solid #8A2BE2; height: 52px"><textarea id = "textKeyWords" rows = "3" cols="65"></textarea></p>
+</div>
+
+<!--задний фон-->
+<div onclick="show('none')" id="wrap"></div>
+<!-- Всплывающее окно-->
+<div style = "border: 3px solid #1E90FF; " id="window">
+    <span class="close" onclick="show('none')">X</span>
+    <center><h1>Справка</h1></center>
+    <p><h3>Для получения реферата Вам необходимо:</h3></p>
+    <p>1. Вставить текст в текстовое поле.</p>
+    <p style = "line-height: 0.5;">2. Выбрать метод реферирования.</p>
+    <p>Они разделены на 2 группы. Методы статистический, симметричный, позиционный, позиционный-статистический и позиционный-симметричный не требуют ввода ключевых слов и групп синонимов.
+        А для использования индикаторного, индикаторного-статистического, индикаторного-симметричного, интергрального  и интегрального (рандом)необходимо ввести ключевые слова и группы синонимов</p>
+    <p>4. Если Вы выбрали методы из второй группы, то введите ключевые слова и группы синонимов как показано на примере.</p>
+    <p>5. Нажать кнопку "Сделать реферат!". Готовый реферат появится в окне справа.</p>
+</div>
+
+<!--Кнопка-->
+<div class = "newWindow">
+    <button style="background:#87CEFA " onclick="show('block')">?</button>
+</div>
+<!--<script type="text/javascript">
+
+    function show(state)
+    {
+        document.getElementById('window').style.display = state;
+        document.getElementById('wrap').style.display = state;
+    }
+</script>-->
 <script src="/js/main.js" ></script>
 </body>
 </html>
