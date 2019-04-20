@@ -158,7 +158,8 @@ $('#formx').submit(function(e){
     var data = new SummaryObject(textEncode, markersEncode, procent, method);*/
 
     $.ajax({
-        url: "http://localhost:8088/summary/do",
+        // url: "http://localhost:8088/summary/do",
+        url: "http://boberpul2.asuscomm.com:8088/summary/do",
         type: "POST",
         //data: $('#formx').serialize(),
         contentType: "application/json",
