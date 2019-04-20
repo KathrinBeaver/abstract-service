@@ -13,9 +13,10 @@ import java.util.Map;
 @Service
 public class SummaryService {
 
+    private MethodsOfSummarization methods;
+
     @Autowired
     private MorfologyService morfologyService;
-    private MethodsOfSummarization methods;
 
     @Autowired
     public SummaryService(){
