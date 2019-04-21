@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>ru.textanalysis</groupId>
 	<artifactId>abstract-service</artifactId>
-	<version>0.0.5-SNAPSHOT</version>
+	<version>0.0.6-SNAPSHOT</version>
 	<name>abstract-service</name>
 	<description>Service for create text summary</description>
 	<packaging>jar</packaging>
