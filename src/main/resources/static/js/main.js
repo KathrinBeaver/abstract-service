@@ -21,7 +21,7 @@ $('#formx').submit(function (e) {
     var procent = $('#volume').val();
     var markers = $('#markersInText').val();
 
-    if (text == '') {
+    if (text == '' || procent == '') {
         $('#textReferat').val("Пожалуйста, введите текст!");
     }
     else {
