@@ -78,8 +78,8 @@ public class SummaryController {
         int numberM = text.getNumberMethod();
 
         String summary = summaryService.getSmartSummary(fullText, allKeyWordsInText, procent, numberM); // полученный реферат
-        List<Word> keyWordsWord = summaryService.getSmartKeyWords(fullText); //ключевые слова
 
+        List<Word> keyWordsWord = summaryService.getSmartKeyWords(fullText); //ключевые слова
         List<String> keyWords = new ArrayList<>();
         for(int i = 0 ; i < keyWordsWord.size(); i++){
             keyWords.add(keyWordsWord.get(i).getWord());

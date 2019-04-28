@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>ru.textanalysis</groupId>
 	<artifactId>abstract-service</artifactId>
-	<version>0.0.6-SNAPSHOT</version>
+	<version>0.0.7-SNAPSHOT</version>
 	<name>abstract-service</name>
 	<description>Service for create text summary</description>
 	<packaging>jar</packaging>
@@ -35,11 +35,11 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>ru.summarizaton.methods</groupId>
-			<artifactId>summarizaton</artifactId>
+			<groupId>ru.summarization.methods</groupId>
+			<artifactId>summarization</artifactId>
 			<version>0.0.1</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/libs/summarizaton-0.0.1.jar</systemPath>
+<!--			<scope>system</scope>-->
+<!--			<systemPath>${basedir}/libs/summarization-0.0.1.jar</systemPath>-->
 		</dependency>
 		<!--<dependency>-->
 		<!--<groupId>ru.textanalysis.tfwwt</groupId>-->
@@ -52,15 +52,14 @@
 			<version>aef2ad2d3c</version>
 		</dependency>
 
-		<dependency>
-			<groupId>nz.ac.waikato.cms.weka</groupId>
-			<artifactId>weka-stable</artifactId>
-			<version>3.6.12</version>
-		</dependency>
-
 	</dependencies>
 
 	<repositories>
+<!--        <repository>-->
+<!--            <id>local-project</id>-->
+<!--            <name>Folder libs in project</name>-->
+<!--            <url>${user.home}/.m2/repository</url>-->
+<!--        </repository>-->
 		<repository>
 			<id>jitpack.io</id>
 			<url>https://jitpack.io</url>
@@ -89,6 +88,26 @@
 					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <file>${basedir}/libs/summarization-0.0.1.jar</file>
+                            <groupId>ru.summarization.methods</groupId>
+                            <artifactId>summarization</artifactId>
+                            <version>0.0.1</version>
+                            <packaging>jar</packaging>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
@@ -103,9 +122,9 @@
 						<configuration>
 							<artifactItems>
 								<artifactItem>
-									<groupId>ru.summarizaton.methods</groupId>
-									<artifactId>summarizaton</artifactId>
-									<version>1.0</version>
+									<groupId>ru.summarization.methods</groupId>
+									<artifactId>summarization</artifactId>
+                                    <version>0.0.1</version>
 									<type>jar</type>
 									<overWrite>true</overWrite>
 									<outputDirectory>${project.build.directory}/classes</outputDirectory>

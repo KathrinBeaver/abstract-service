@@ -14,8 +14,8 @@
 <form action = "" method = 'post' id = 'formx'>
 
     <div class ="text">
-    <p><b>1. Введите текст в текстовое поле</b></p>
-    <p style = "border: 1px solid #8A2BE2; width: 594px; height: 461.5px;"><textarea id = 'text' rows = "30" cols = "80"></textarea></p>
+        <p><b>1. Введите текст в текстовое поле</b></p>
+        <p style = "border: 1px solid #8A2BE2; width: 594px; height: 461.5px;"><textarea id = 'text' rows = "30" cols = "80"></textarea></p>
     </div>
 
     <div class="methods" id="methodsOfSummarization">
@@ -30,27 +30,16 @@
                 <option value = "5">Позиционный-Симметричный</option>
             </optgroup>
             <optgroup label = "C использованием ключевых слов">
-                    <option value = "6">Индикаторный</option>
-                    <option value = "7">Индикаторный-Статистический</option>
-                    <option value = "8">Индикаторный-Симметричный</option>
-                    <option value = "9">Интегральный</option>
-                    <option value = "10">Интегральный (случайный выбор)</option>
-                </optgroup>
+                <option value = "6">Индикаторный</option>
+                <option value = "7">Индикаторный-Статистический</option>
+                <option value = "8">Индикаторный-Симметричный</option>
+                <option value = "9">Интегральный</option>
+                <option value = "10">Интегральный (случайный выбор)</option>
+            </optgroup>
         </select>
     </div>
 
 
-   <!-- <script type="text/javascript">
-        function Selected(a)
-        {
-            if(a == 6 || a == 7 || a == 8 || a == 9 || a == 10){
-                document.getElementById('mr').style.display = 'block';
-            } else if (a == 1 || a == 2 || a == 3 || a == 4 || a == 5){
-                document.getElementById('mr').style.display = 'none';
-            }
-        }
-    </script>
--->
     <div class = "procent">
         <p style = "line-height: 0.5;"><b>3. Введите объём реферата в процентах</b></p>
         <p style = "fline-height: 0.5;"><i>(например: 30, 50, 70)</i></p>
@@ -63,26 +52,9 @@
         <p style = "border: 1px solid #8A2BE2; height: 36px; width: 594px"><textarea id = 'markersInText'rows = "2" cols = "80"></textarea></p>
     </div>
 
-    <p><input type="submit" class= "b1" value="Получить реферат!"></p>
+    <p><input type="submit" onclick="ShowGif('block')" class= "b1" value="Получить реферат!"></p>
 </form>
 
-
-<!--<script type="text/javascript">
-    $('#formx').submit(function(e){
-        e.preventDefault();
-        $.ajax({
-            url: "localhost:8088",
-            type: "POST",
-            data: $('#formx').serialize(),
-            success: function(returnData) {
-                $('#textReferat').html(returnData);
-            },
-            error: function(){
-                $('#textReferat').val("Всё плохо! Ничего не получается!");
-            }
-        });
-    });
-</script>-->
 
 <div id = "ref" class="referat">
     <p><b>Реферат</b></p>
@@ -97,30 +69,28 @@
 <!--задний фон-->
 <div onclick="show('none')" id="wrap"></div>
 <!-- Всплывающее окно-->
-<div style = "border: 3px solid #1E90FF; " id="window">
+<div style = "border: 3px solid #FF69B4; " id="window">
     <span class="close" onclick="show('none')">X</span>
     <center><h1>Справка</h1></center>
-    <p><h3>Для получения реферата Вам необходимо:</h3></p>
-    <p>1. Вставить текст в текстовое поле.</p>
+    <p><h3>Для получения реферата и ключевых слов необходимо выполнить следующие шаги:</h3></p>
+    <p>1. Вставить исходный текст в текстовое поле.</p>
     <p style = "line-height: 0.5;">2. Выбрать метод реферирования.</p>
-    <p>Они разделены на 2 группы. Методы статистический, симметричный, позиционный, позиционный-статистический и позиционный-симметричный не требуют ввода ключевых слов и групп синонимов.
-        А для использования индикаторного, индикаторного-статистического, индикаторного-симметричного, интергрального  и интегрального (рандом)необходимо ввести ключевые слова и группы синонимов</p>
-    <p>4. Если Вы выбрали методы из второй группы, то введите ключевые слова и группы синонимов как показано на примере.</p>
-    <p>5. Нажать кнопку "Сделать реферат!". Готовый реферат появится в окне справа.</p>
+    <p>Они разделены на 2 группы. Методы статистический, симметричный, позиционный, позиционный-статистический и позиционный-симметричный не требуют ввода ключевых слов.
+        А для использования индикаторного, индикаторного-статистического, индикаторного-симметричного, интергрального и интегрального (случайный выбор) необходимо ввести ключевые слова.</p>
+    <p>3. Указать объём реферата в процентах, как показано на примере.</p>
+    <p>4. Если выбран метод из второй группы, необходимо ввести ключевые слова, как показано на примере.</p>
+    <p>5. Нажать кнопку "Получить реферат!". Готовый реферат и ключевые слова отобразятся в соответствующих текстовых полях.</p>
 </div>
 
 <!--Кнопка-->
 <div class = "newWindow">
     <button style="background:#87CEFA " onclick="show('block')">?</button>
 </div>
-<!--<script type="text/javascript">
 
-    function show(state)
-    {
-        document.getElementById('window').style.display = state;
-        document.getElementById('wrap').style.display = state;
-    }
-</script>-->
+<div id = "gif">
+    <img src="/img/load.gif">
+</div>
+
 <script src="/js/main.js" ></script>
 </body>
 </html>

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.library.text.word.Word;
 import ru.textanalysis.tfwwt.jmorfsdk.JMorfSdk;
-import summarizaton.MethodsOfSummarization;
+import summarization.MethodsOfSummarizationAndElementsOfText;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,14 +14,14 @@ import java.util.Map;
 @Service
 public class SummaryService {
 
-    private MethodsOfSummarization methods;
+    private MethodsOfSummarizationAndElementsOfText methods;
 
     @Autowired
     private MorfologyService morfologyService;
 
     @Autowired
     public SummaryService(){
-        methods = new MethodsOfSummarization();
+        methods = new MethodsOfSummarizationAndElementsOfText();
     }
 
     public String getSummary(String fullText) {
@@ -52,14 +52,8 @@ public class SummaryService {
         return kWords;
     }
 
-    public List<Word> getSmartKeyWords (String fullText) {
-        MethodsOfSummarization ms = new MethodsOfSummarization();
-        List<Word> keyWords = ms.getKeyWords(fullText);
-        return keyWords;
-    }
-
     public String getSmartSummary(String fullText, String markers, int procentOfText, int numberOfMethod) {
-        MethodsOfSummarization mS = new MethodsOfSummarization();
+        MethodsOfSummarizationAndElementsOfText mS = new MethodsOfSummarizationAndElementsOfText();
         Map<Integer, String> summaryMap = new HashMap<>();
 
         switch (numberOfMethod){
@@ -95,6 +89,13 @@ public class SummaryService {
                 break;
         }
         String summary = mS.getReferatToString(summaryMap);
+
         return summary;
+    }
+
+    public List<Word> getSmartKeyWords (String fullText) {
+        MethodsOfSummarizationAndElementsOfText ms = new MethodsOfSummarizationAndElementsOfText();
+        List<Word> keyWords = ms.getKeyWords(fullText);
+        return keyWords;
     }
 }

@@ -1,8 +1,0 @@
-апр 20, 2019 8:47:30 PM summarizaton.SentenceProcessing splitSentenceByWordsInInitialForm
-WARNING: В словаре отсутствет слово: xix
-апр 20, 2019 8:47:30 PM summarizaton.SentenceProcessing splitSentenceByWordsInInitialForm
-WARNING: В словаре отсутствет слово: внутриконтинентальной
-апр 20, 2019 8:47:30 PM summarizaton.SentenceProcessing splitSentenceByWordsInInitialForm
-WARNING: В словаре отсутствет слово: -89,2°c
-апр 20, 2019 8:47:30 PM summarizaton.SentenceProcessing splitSentenceByWordsInInitialForm
-WARNING: В словаре отсутствет слово: м/с
