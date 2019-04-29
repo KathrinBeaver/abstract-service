@@ -9,6 +9,7 @@
         <webroots />
         <sourceRoots>
           <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/lib" />
           <root url="file://$MODULE_DIR$/src/main/resources" />
         </sourceRoots>
       </configuration>
@@ -21,10 +22,12 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/lib" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: summarizaton:summarizaton:0.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-web:2.1.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:2.1.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:2.1.3.RELEASE" level="project" />
@@ -81,10 +84,10 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:5.1.5.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.xmlunit:xmlunit-core:2.6.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.18.6" level="project" />
-    <orderEntry type="library" name="Maven: summarizaton:summarizaton:0.0.1" level="project" />
-    <orderEntry type="library" name="Maven: com.github.jalexpr:JMorfSdk:714cb10d25" level="project" />
+    <orderEntry type="library" name="Maven: ru.summarization.methods:summarization:0.0.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.jalexpr:JMorfSdk:aef2ad2d3c" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.github.jalexpr:MorphologicalStructures:master-521c1ddeed-1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: com.github.jalexpr:TemplateWrapperClasses:master-f512576d49-1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: com.github.jalexpr:TemplateWrapperClasses:master-12223956f2-1" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.xerial:sqlite-jdbc:3.25.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.tukaani:xz:1.8" level="project" />
   </component>

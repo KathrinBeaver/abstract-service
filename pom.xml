@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -8,11 +8,12 @@
 		<version>2.1.3.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
+	<groupId>ru.textanalysis</groupId>
 	<artifactId>abstract-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.7-SNAPSHOT</version>
 	<name>abstract-service</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Service for create text summary</description>
+	<packaging>jar</packaging>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -34,11 +35,12 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>summarizaton</groupId>
-			<artifactId>summarizaton</artifactId>
+			<groupId>ru.summarization.methods</groupId>
+			<artifactId>summarization</artifactId>
 			<version>0.0.1</version>
+			<!--			<scope>system</scope>-->
+			<!--			<systemPath>${basedir}/libs/summarization-0.0.1.jar</systemPath>-->
 		</dependency>
-
 		<!--<dependency>-->
 		<!--<groupId>ru.textanalysis.tfwwt</groupId>-->
 		<!--<artifactId>jmorfsdk</artifactId>-->
@@ -47,12 +49,17 @@
 		<dependency>
 			<groupId>com.github.jalexpr</groupId>
 			<artifactId>JMorfSdk</artifactId>
-			<version>714cb10d25</version>
+			<version>aef2ad2d3c</version>
 		</dependency>
 
 	</dependencies>
 
 	<repositories>
+		<!--        <repository>-->
+		<!--            <id>local-project</id>-->
+		<!--            <name>Folder libs in project</name>-->
+		<!--            <url>${user.home}/.m2/repository</url>-->
+		<!--        </repository>-->
 		<repository>
 			<id>jitpack.io</id>
 			<url>https://jitpack.io</url>
@@ -60,12 +67,75 @@
 	</repositories>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+				<includes>
+					<include>**/**</include>
+				</includes>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<useSystemClassLoader>false</useSystemClassLoader>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.5.2</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<configuration>
+							<file>${basedir}/libs/summarization-0.0.2.jar</file>
+							<groupId>ru.summarization.methods</groupId>
+							<artifactId>summarization</artifactId>
+							<version>0.0.2</version>
+							<packaging>jar</packaging>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.1.1</version>
+				<executions>
+					<execution>
+						<id>unpack-resources</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>ru.summarization.methods</groupId>
+									<artifactId>summarization</artifactId>
+									<version>0.0.2</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/classes</outputDirectory>
+									<includes>**/**</includes>
+								</artifactItem>
+							</artifactItems>
+							<includes>**/**</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
-
 </project>

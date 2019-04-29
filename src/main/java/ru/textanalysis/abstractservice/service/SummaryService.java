@@ -4,32 +4,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.library.text.word.Word;
 import ru.textanalysis.tfwwt.jmorfsdk.JMorfSdk;
-import summarizaton.MethodsOfSummarization;
+import summarization.MethodsOfSummarizationAndElementsOfText;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
 public class SummaryService {
 
+    private MethodsOfSummarizationAndElementsOfText methods;
+
     @Autowired
     private MorfologyService morfologyService;
-    private MethodsOfSummarization methods;
 
     @Autowired
     public SummaryService(){
-        methods = new MethodsOfSummarization();
+        methods = new MethodsOfSummarizationAndElementsOfText();
     }
 
-    public String getSummary(String fullText) {
+    public String getSummary(String fullText, int percent) {
         // Логика получения реферата и ключевых слов
-        JMorfSdk jMorfSdk = morfologyService.getjMorfSdk();
-        jMorfSdk.getMorfologyCharacteristics("столов");
-
-        Map<Integer, String> referat = methods.getReferatOfMethodSymmetric(fullText,50);
+        Map<Integer, String> referat = methods.getReferatOfMethodSymmetric(fullText,percent);
         String summary = methods.getReferatToString(referat);
-
         return summary;
     }
 
@@ -52,5 +50,52 @@ public class SummaryService {
             }
         }
         return kWords;
+    }
+
+    public String getSmartSummary(String fullText, String markers, int procentOfText, int numberOfMethod) {
+        MethodsOfSummarizationAndElementsOfText mS = new MethodsOfSummarizationAndElementsOfText();
+        Map<Integer, String> summaryMap = new HashMap<>();
+
+        switch (numberOfMethod){
+            case 1:
+                summaryMap = mS.getReferatOfMethodStatistic(fullText, procentOfText);
+                break;
+            case 2:
+                summaryMap = mS.getReferatOfMethodSymmetric(fullText, procentOfText);
+                break;
+            case 3:
+                summaryMap = mS.getReferatOfMethodPosition(fullText);
+                break;
+            case 4:
+                summaryMap = mS.getReferatOfMethodPositionAndStatistic(fullText, procentOfText);
+                break;
+            case 5:
+                summaryMap = mS.getReferatOfMethodPositionAndSymmetric(fullText, procentOfText);
+                break;
+            case 6:
+                summaryMap = mS.getReferatOfMethodIndicator(fullText, markers, procentOfText);
+                break;
+            case 7:
+                summaryMap = mS.getReferatOfMethodIndicatorAndStatistic(fullText, markers, procentOfText);
+                break;
+            case 8:
+                summaryMap = mS.getRefeartOfMethodIndicatorAndSymmetric(fullText, markers, procentOfText);
+                break;
+            case 9:
+                summaryMap = mS.getReferatOfMethodIntegration(fullText, markers, procentOfText);
+                break;
+            case 10:
+                summaryMap = mS.getReferatOfMethodIntegrationRandom(fullText, markers, procentOfText);
+                break;
+        }
+        String summary = mS.getReferatToString(summaryMap);
+
+        return summary;
+    }
+
+    public List<Word> getSmartKeyWords (String fullText) {
+        MethodsOfSummarizationAndElementsOfText ms = new MethodsOfSummarizationAndElementsOfText();
+        List<Word> keyWords = ms.getKeyWords(fullText);
+        return keyWords;
     }
 }
