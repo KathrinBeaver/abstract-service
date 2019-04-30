@@ -24,9 +24,9 @@ public class SummaryService {
         methods = new MethodsOfSummarizationAndElementsOfText();
     }
 
-    public String getSummary(String fullText) {
+    public String getSummary(String fullText, int percent) {
         // Логика получения реферата и ключевых слов
-        Map<Integer, String> referat = methods.getReferatOfMethodSymmetric(fullText,50);
+        Map<Integer, String> referat = methods.getReferatOfMethodSymmetric(fullText,percent);
         String summary = methods.getReferatToString(referat);
         return summary;
     }

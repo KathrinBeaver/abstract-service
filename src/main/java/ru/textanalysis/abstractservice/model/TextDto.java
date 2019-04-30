@@ -5,4 +5,5 @@ import lombok.Data;
 @Data
 public class TextDto {
     private String text;
+    private int percent;
 }

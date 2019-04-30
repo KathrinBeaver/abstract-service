@@ -34,8 +34,9 @@ public class SummaryController {
         String textEncoded = text.getText();
         String fullText = new String(Base64.getUrlDecoder().decode(textEncoded), Charset.forName("UTF-8"));
         logger.info(fullText);
+        fullText = fullText.replaceAll("\n{2,}","\n");
 
-        String summary = summaryService.getSummary(fullText); // полученный реферат
+        String summary = summaryService.getSummary(fullText,text.getPercent()); // полученный реферат
         List<String> keyWords = summaryService.getKeyWords(fullText); // полученный список ключевых слов
 
         Base64.Encoder encoder = Base64.getUrlEncoder();
