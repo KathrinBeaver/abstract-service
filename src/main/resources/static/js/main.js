@@ -26,9 +26,13 @@ $('#formx').submit(function(e){
     var mSel = document.getElementById('method');
     var method = mSel.options[mSel.selectedIndex].value;
     var procent = $('#volume').val();
+    if (procent == ''){
+        procent = 50;
+        $('#volume').val("50");
+    }
     var markers = $('#markersInText').val();
 
-    if (text == '' || procent == '' || method == '') {
+    if (text == '') {
         $('#textReferat').val("Пожалуйста, введите текст, выберите метод реферирования и укажите объём реферата! Если Вам непонятно как пользоваться сервисом, откройте справочную информацию.");
         ShowGif('none');
     }
@@ -46,7 +50,7 @@ $('#formx').submit(function(e){
 
         $.ajax({
             url: "http://boberpul2.asuscomm.com:8088/summary/do",
-            // url: "http://localhost:8088/summary/do",
+            //url: "http://localhost:8088/summary/do",
             type: "POST",
             //data: $('#formx').serialize(),
             contentType: "application/json",
@@ -58,15 +62,18 @@ $('#formx').submit(function(e){
                 var markersDecode = "";
 
                 if(result.summary == undefined || result.summary == null || result.summary == "" ){
-                    $('#textReferat').val("Пожалуйста, увеличьте текст");
+                    $('#textReferat').val("Пожалуйста, увеличьте текст!");
                 } else {
                     var textDecode = decodeURIComponent(escape(atob(result.summary)));
+                    $('#textReferat').val(textDecode);
+                }
 
+                if (result.keyWords.length == 0 || result.keyWords.length == null){
+                    $('#textKeyWords').val("Список ключевых слов пуст.");
+                } else {
                     for (var i = 0; i < result.keyWords.length; ++i) {
                         markersDecode += decodeURIComponent(escape(atob(result.keyWords[i]))) + ", ";
                     }
-
-                    $('#textReferat').val(textDecode);
                     $('#textKeyWords').val(markersDecode);
                 }
             },

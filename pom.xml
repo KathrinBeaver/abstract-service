@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>ru.textanalysis</groupId>
 	<artifactId>abstract-service</artifactId>
-	<version>0.0.7-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>abstract-service</name>
 	<description>Service for create text summary</description>
 	<packaging>jar</packaging>
@@ -37,7 +37,7 @@
 		<dependency>
 			<groupId>ru.summarization.methods</groupId>
 			<artifactId>summarization</artifactId>
-			<version>0.0.1</version>
+			<version>1.0.0</version>
 <!--			<scope>system</scope>-->
 <!--			<systemPath>${basedir}/libs/summarization-0.0.1.jar</systemPath>-->
 		</dependency>
@@ -55,11 +55,6 @@
 	</dependencies>
 
 	<repositories>
-<!--        <repository>-->
-<!--            <id>local-project</id>-->
-<!--            <name>Folder libs in project</name>-->
-<!--            <url>${user.home}/.m2/repository</url>-->
-<!--        </repository>-->
 		<repository>
 			<id>jitpack.io</id>
 			<url>https://jitpack.io</url>
@@ -94,15 +89,15 @@
                 <version>2.5.2</version>
                 <executions>
                     <execution>
-                        <phase>initialize</phase>
+                        <phase>validate</phase>
                         <goals>
                             <goal>install-file</goal>
                         </goals>
                         <configuration>
-                            <file>${basedir}/libs/summarization-0.0.1.jar</file>
+                            <file>${basedir}/libs/summarization-1.0.0.jar</file>
                             <groupId>ru.summarization.methods</groupId>
                             <artifactId>summarization</artifactId>
-                            <version>0.0.1</version>
+                            <version>1.0.0</version>
                             <packaging>jar</packaging>
                         </configuration>
                     </execution>

@@ -20,8 +20,8 @@
 
     <div class="methods" id="methodsOfSummarization">
         <p><b>2. Выберите метод реферирования</b><p>
-        <p> <select id = "method" onChange="Selected(this.value)">
-            <option selected="selected" disabled>Выберите метод</option>
+        <p> <select id = "method" onchange="Selected(this.value)">
+           <!-- <option selected="selected" disabled>Выберите метод</option>-->
             <optgroup label = "Без использования ключевых слов">
                 <option value = "1">Статистический</option>
                 <option value = "2">Симметричный</option>
@@ -33,14 +33,14 @@
                 <option value = "6">Индикаторный</option>
                 <option value = "7">Индикаторный-Статистический</option>
                 <option value = "8">Индикаторный-Симметричный</option>
-                <option value = "9">Интегральный</option>
+                <option value = "9" selected>Интегральный</option>
                 <option value = "10">Интегральный (случайный выбор)</option>
             </optgroup>
         </select>
     </div>
 
 
-    <div class = "procent">
+    <div class = "procent" >
         <p style = "line-height: 0.5;"><b>3. Введите объём реферата в процентах</b></p>
         <p style = "fline-height: 0.5;"><i>(например: 30, 50, 70)</i></p>
         <p style = "border: 1px solid #8A2BE2; width: 90px; height: 21px"><textarea id = 'volume'rows = "1" cols = "10"></textarea><p>
