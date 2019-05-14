@@ -43,14 +43,14 @@ $('#formx').submit(function(e){
         var summary = {
             "text": textEncode,
             "keyWords": markersEncode,
-            "procentOfText": procent,
+            "percentOfText": procent,
             "numberMethod": method
         };
         var data = JSON.stringify(summary);
 
         $.ajax({
             url: "http://boberpul2.asuscomm.com:8088/summary/do",
-            //url: "http://localhost:8088/summary/do",
+            // url: "http://localhost:8088/summary/do",
             type: "POST",
             //data: $('#formx').serialize(),
             contentType: "application/json",
