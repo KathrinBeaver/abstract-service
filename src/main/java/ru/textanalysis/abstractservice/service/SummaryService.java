@@ -24,7 +24,7 @@ public class SummaryService {
     }
 
     public String getSummary(String fullText, int percent) {
-        Map<Integer, String> referat = methods.getReferatOfMethodSymmetric(fullText,percent);
+        Map<Integer, String> referat = methods.getReferatOfMethodIntegration(fullText,"",percent);
         String summary = methods.getReferatToString(referat);
         return summary;
     }
