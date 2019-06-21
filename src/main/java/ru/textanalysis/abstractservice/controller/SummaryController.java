@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.library.text.word.Word;
 import ru.textanalysis.abstractservice.exception.EncodeException;
+import ru.textanalysis.abstractservice.exception.KeyWordsException;
+import ru.textanalysis.abstractservice.exception.SummaryException;
 import ru.textanalysis.abstractservice.model.AbstractDataDto;
 import ru.textanalysis.abstractservice.model.TextDto;
 import ru.textanalysis.abstractservice.payload.SummaryResponse;
@@ -36,8 +38,21 @@ public class SummaryController {
         logger.info(fullText);
         fullText = fullText.replaceAll("\n{2,}","\n");
 
-        String summary = summaryService.getSummary(fullText,text.getPercent()); // полученный реферат
-        List<String> keyWords = summaryService.getKeyWords(fullText); // полученный список ключевых слов
+        String summary = "";
+        try {
+            summary = summaryService.getSummary(fullText, text.getPercent()); // полученный реферат
+        } catch (Exception e){
+            logger.error("Unable to get the summary");
+            throw new SummaryException("Unable to get the summary", e);
+        }
+
+        List<String> keyWords = new ArrayList<>();
+        try {
+            keyWords = summaryService.getKeyWords(fullText); // полученный список ключевых слов
+        } catch (Exception e){
+            logger.error("Keywords list is empty");
+            throw new KeyWordsException("Keywords list is empty", e);
+        }
 
         Base64.Encoder encoder = Base64.getUrlEncoder();
 
@@ -67,20 +82,33 @@ public class SummaryController {
         String textEncoded = text.getText();
         String fullText = new String(Base64.getDecoder().decode(textEncoded), Charset.forName("UTF-8"));
         logger.info(fullText);
+        fullText = fullText.replaceAll("\n{2,}","\n");
 
         String keyWordsInTextEncoder = text.getKeyWords();
         String allKeyWordsInText = new String(Base64.getDecoder().decode(keyWordsInTextEncoder), Charset.forName("UTF-8"));
         logger.info(allKeyWordsInText);
 
-        int procent = text.getProcentOfText();
+        int procent = text.getPercentOfText();
         logger.info(String.valueOf(procent));
 
         //номер метода реферирования
         int numberM = text.getNumberMethod();
 
-        String summary = summaryService.getSmartSummary(fullText, allKeyWordsInText, procent, numberM); // полученный реферат
+        String summary = "";
+        try {
+            summary = summaryService.getSmartSummary(fullText, allKeyWordsInText, procent, numberM); // полученный реферат
+        } catch (Exception e){
+            logger.error("Unable to get the summary");
+            throw new SummaryException("Unable to get the summary", e);
+        }
 
-        List<Word> keyWordsWord = summaryService.getSmartKeyWords(fullText); //ключевые слова
+        List<Word> keyWordsWord  = new ArrayList<>();
+        try {
+            keyWordsWord = summaryService.getSmartKeyWords(fullText); //ключевые слова
+        } catch (Exception e){
+            logger.error("Keywords list is empty");
+            throw new KeyWordsException("Keywords list is empty", e);
+        }
         List<String> keyWords = new ArrayList<>();
         for(int i = 0 ; i < keyWordsWord.size(); i++){
             keyWords.add(keyWordsWord.get(i).getWord());

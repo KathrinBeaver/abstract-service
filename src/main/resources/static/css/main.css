@@ -30,7 +30,7 @@ body {
 
 }
 .markers {
-    display: none;
+    display: block;
     position: absolute;
     top: 605px;
     overflow: auto;

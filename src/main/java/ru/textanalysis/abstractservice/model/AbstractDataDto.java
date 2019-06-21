@@ -6,6 +6,6 @@ import lombok.Data;
 public class AbstractDataDto {
     private String text;
     private String keyWords;
-    private int procentOfText;
+    private int percentOfText;
     private int numberMethod;
 }

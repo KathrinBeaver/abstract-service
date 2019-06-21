@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>ru.textanalysis</groupId>
 	<artifactId>abstract-service</artifactId>
-	<version>0.0.7-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>abstract-service</name>
 	<description>Service for create text summary</description>
 	<packaging>jar</packaging>
@@ -37,9 +37,9 @@
 		<dependency>
 			<groupId>ru.summarization.methods</groupId>
 			<artifactId>summarization</artifactId>
-			<version>0.0.1</version>
-			<!--			<scope>system</scope>-->
-			<!--			<systemPath>${basedir}/libs/summarization-0.0.1.jar</systemPath>-->
+			<version>1.0.0</version>
+<!--			<scope>system</scope>-->
+<!--			<systemPath>${basedir}/libs/summarization-0.0.1.jar</systemPath>-->
 		</dependency>
 		<!--<dependency>-->
 		<!--<groupId>ru.textanalysis.tfwwt</groupId>-->
@@ -55,11 +55,6 @@
 	</dependencies>
 
 	<repositories>
-		<!--        <repository>-->
-		<!--            <id>local-project</id>-->
-		<!--            <name>Folder libs in project</name>-->
-		<!--            <url>${user.home}/.m2/repository</url>-->
-		<!--        </repository>-->
 		<repository>
 			<id>jitpack.io</id>
 			<url>https://jitpack.io</url>
@@ -88,26 +83,26 @@
 					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-install-plugin</artifactId>
-				<version>2.5.2</version>
-				<executions>
-					<execution>
-						<phase>initialize</phase>
-						<goals>
-							<goal>install-file</goal>
-						</goals>
-						<configuration>
-							<file>${basedir}/libs/summarization-0.0.2.jar</file>
-							<groupId>ru.summarization.methods</groupId>
-							<artifactId>summarization</artifactId>
-							<version>0.0.2</version>
-							<packaging>jar</packaging>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <file>${basedir}/libs/summarization-1.0.0.jar</file>
+                            <groupId>ru.summarization.methods</groupId>
+                            <artifactId>summarization</artifactId>
+                            <version>1.0.0</version>
+                            <packaging>jar</packaging>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
@@ -124,7 +119,7 @@
 								<artifactItem>
 									<groupId>ru.summarization.methods</groupId>
 									<artifactId>summarization</artifactId>
-									<version>0.0.2</version>
+                                    <version>0.0.1</version>
 									<type>jar</type>
 									<overWrite>true</overWrite>
 									<outputDirectory>${project.build.directory}/classes</outputDirectory>
